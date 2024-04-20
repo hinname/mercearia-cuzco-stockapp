@@ -1,7 +1,8 @@
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
+import { SignInStackTypes } from '../../types/stackNavigation';
 
-export default function SignIn() {
+export default function SignIn({ navigation, route }: SignInStackTypes) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
