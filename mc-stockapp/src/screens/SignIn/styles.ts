@@ -53,6 +53,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
   },
+  link: {
+    marginTop: 24,
+  },
+  linkText: {
+    color: '#FF7926',
+    fontWeight: 'bold',
+    fontSize: 16,
+    alignSelf: 'center',
+  }
 });
 
 export default styles;

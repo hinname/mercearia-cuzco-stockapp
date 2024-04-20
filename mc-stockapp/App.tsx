@@ -45,6 +45,7 @@ export default function App() {
             headerTitleStyle: {
               fontWeight: 'bold',
             },
+            headerTintColor: '#000',
           }}>
             <StackLogin.Screen name="Login" component={SignIn} initialParams={{funcSignIn: setIsSignedIn}} />
             <StackLogin.Screen name="Cadastro" component={SignUp} />

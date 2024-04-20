@@ -3,10 +3,13 @@ import styles from './styles';
 import { SignInStackTypes } from '../../types/stackNavigation';
 
 export default function SignIn({ navigation, route }: SignInStackTypes) {
+  function handleNavigateToSignUp() {
+    navigation.navigate('Cadastro');
+  }
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.titleCompany}>MERCEARIA CUZCO</Text>
+        <Text style={styles.titleCompany}>MERCADO CUZCO</Text>
         <Text style={styles.titleApp}>Controle de estoque</Text>
       </View>
       <View style={styles.form}>
@@ -16,10 +19,13 @@ export default function SignIn({ navigation, route }: SignInStackTypes) {
         </View>
         <View>
           <Text style={styles.inputText}>Senha</Text>
-          <TextInput style={styles.input} />
+          <TextInput secureTextEntry={true} style={styles.input} />
         </View>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Entrar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.link} onPress={handleNavigateToSignUp}>
+          <Text style={styles.linkText}>Registrar-se</Text>
         </TouchableOpacity>
       </View>
     </View>
