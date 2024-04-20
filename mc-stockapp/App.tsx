@@ -31,7 +31,14 @@ export default function App() {
             )}} />
           </Tab.Navigator>
         ) : (
-          <StackLogin.Navigator>
+          <StackLogin.Navigator screenOptions={{
+            headerStyle: {
+              backgroundColor: '#ff7926',
+            },
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}>
             <StackLogin.Screen name="Login" component={SignIn} initialParams={{funcSignIn: setIsSignedIn}} />
             <StackLogin.Screen name="Cadastrar-se" component={SignUp} />
           </StackLogin.Navigator>
