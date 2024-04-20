@@ -1,12 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const StackSignIn = createNativeStackNavigator();
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      {
+        isSignedIn ? (
+          <View style={styles.container}>
+            <Text>Stock App</Text>
+            <StatusBar style="auto" />
+          </View>
+        ) : (
+          <View style={styles.container}>
+            <Text>Login</Text>
+            <StatusBar style="auto" />
+          </View>
+        )
+      }
+    </NavigationContainer>
   );
 }
 
