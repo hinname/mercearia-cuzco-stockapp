@@ -14,8 +14,8 @@ export default function SignIn({ navigation, route }: SignInStackTypes) {
       </View>
       <View style={styles.form}>
         <View>
-          <Text style={styles.inputText}>Usuário</Text>
-          <TextInput style={styles.input} />
+          <Text style={styles.inputText}>Email</Text>
+          <TextInput style={styles.input} keyboardType='email-address' />
         </View>
         <View>
           <Text style={styles.inputText}>Senha</Text>

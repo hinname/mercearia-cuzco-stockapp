@@ -5,3 +5,4 @@ export type LoginStackParamList = {
   Cadastro: undefined;
 }
 export type SignInStackTypes = NativeStackScreenProps<LoginStackParamList, 'Login'>;
+export type SignUpStackTypes = NativeStackScreenProps<LoginStackParamList, 'Cadastro'>;
