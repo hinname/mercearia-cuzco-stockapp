@@ -21,21 +21,47 @@ export default function App() {
   const StackProducts = createNativeStackNavigator();
   const StackUsers = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
+
+  function ProductsNav() {
+    return (
+      <StackProducts.Navigator screenOptions={{
+        headerStyle: {
+          backgroundColor: '#ff7926',
+        },
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerTintColor: '#000',
+      
+      }}>
+        <StackProducts.Screen name="Lista de Produtos" component={Products} />
+      </StackProducts.Navigator>
+    );
+  }
+
+  function UsersNav() {
+    return (
+      <StackUsers.Navigator screenOptions={{
+        headerStyle: {
+          backgroundColor: '#ff7926',
+        },
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerTintColor: '#000',
+      }}>
+        <StackUsers.Screen name="Lista de Usuários" component={Users} />
+      </StackUsers.Navigator>
+    );
+  }
+
   return (
     <NavigationContainer>
       {
         isSignedIn ? (
           <Tab.Navigator>
-            <Tab.Screen name="Produtos" options={{headerShown: false}} component={() => {return (
-              <StackProducts.Navigator>
-                <StackProducts.Screen name="Lista de Produtos" component={Products} />
-              </StackProducts.Navigator>
-            )}} />
-            <Tab.Screen name="Usuários" options={{headerShown: false}} component={() => {return (
-              <StackUsers.Navigator>
-                <StackUsers.Screen name="Lista de Usuários" component={Users} />
-              </StackUsers.Navigator>
-            )}} />
+            <Tab.Screen name="Produtos" options={{headerShown: false}} component={ProductsNav} />
+            <Tab.Screen name="Operadores" options={{headerShown: false}} component={UsersNav} />
           </Tab.Navigator>
         ) : (
           <StackLogin.Navigator screenOptions={{
