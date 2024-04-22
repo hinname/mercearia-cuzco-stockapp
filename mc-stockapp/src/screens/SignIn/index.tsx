@@ -16,7 +16,7 @@ export default function SignIn({ navigation, route }: SignInStackTypes) {
   }
 
   function handleNavigateToSignUp() {
-    navigation.navigate('Cadastro');
+    navigation.navigate('signup');
   }
   return (
     <View style={styles.container}>

@@ -8,19 +8,19 @@ LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
 ]);
 
-import { LoginStackParamList } from './src/types/stackNavigation';
-
 import SignIn from './src/screens/SignIn';
 import SignUp from './src/screens/SignUp';
 import Users from './src/screens/Users';
 import Products from './src/screens/Products';
 
+import { LoginStackParamList, MainTabParamList, ProductsStackParamList, UsersStackParamList } from './src/types/stackNavigation';
+
 export default function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const StackLogin = createNativeStackNavigator<LoginStackParamList>();
-  const StackProducts = createNativeStackNavigator();
-  const StackUsers = createNativeStackNavigator();
-  const Tab = createBottomTabNavigator();
+  const StackProducts = createNativeStackNavigator<ProductsStackParamList>();
+  const StackUsers = createNativeStackNavigator<UsersStackParamList>();
+  const Tab = createBottomTabNavigator<MainTabParamList>();
 
   function ProductsNav() {
     return (
@@ -34,7 +34,7 @@ export default function App() {
         headerTintColor: '#000',
       
       }}>
-        <StackProducts.Screen name="Lista de Produtos" component={Products} />
+        <StackProducts.Screen options={{title: 'Lista de Produtos'}} name="productsList" component={Products} />
       </StackProducts.Navigator>
     );
   }
@@ -50,7 +50,7 @@ export default function App() {
         },
         headerTintColor: '#000',
       }}>
-        <StackUsers.Screen name="Lista de Usuários" component={Users} />
+        <StackUsers.Screen options={{title: 'Lista de Usuários'}} name="usersList" component={Users} />
       </StackUsers.Navigator>
     );
   }
@@ -60,8 +60,8 @@ export default function App() {
       {
         isSignedIn ? (
           <Tab.Navigator>
-            <Tab.Screen name="Produtos" options={{headerShown: false}} component={ProductsNav} />
-            <Tab.Screen name="Operadores" options={{headerShown: false}} component={UsersNav} />
+            <Tab.Screen name="products" options={{headerShown: false}} component={ProductsNav} />
+            <Tab.Screen name="users" options={{headerShown: false}} component={UsersNav} />
           </Tab.Navigator>
         ) : (
           <StackLogin.Navigator screenOptions={{
@@ -73,8 +73,8 @@ export default function App() {
             },
             headerTintColor: '#000',
           }}>
-            <StackLogin.Screen name="Login" component={SignIn} initialParams={{funcSignIn: setIsSignedIn}} />
-            <StackLogin.Screen name="Cadastro" component={SignUp} />
+            <StackLogin.Screen options={{title: 'Login'}} name="signin" component={SignIn} initialParams={{funcSignIn: setIsSignedIn}} />
+            <StackLogin.Screen options={{title: 'Cadastro'}} name="signup" component={SignUp} />
           </StackLogin.Navigator>
         )
       }
