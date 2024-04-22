@@ -1,8 +1,8 @@
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
-import { SettingsStackTypes } from '../../types/stackNavigation';
+import { SettingsTabTypes } from '../../types/bottomTabNavigation';
 
-export default function Settings({navigation, route} : SettingsStackTypes) {
+export default function Settings({navigation, route} : SettingsTabTypes) {
   function handleLogout() {
     Alert.alert('Confirmar saída', 'Deseja realmente sair do aplicativo?', [
       {

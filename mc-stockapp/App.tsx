@@ -12,9 +12,11 @@ import SignIn from './src/screens/SignIn';
 import SignUp from './src/screens/SignUp';
 import Users from './src/screens/Users';
 import Products from './src/screens/Products';
-
-import { LoginStackParamList, MainTabParamList, ProductsStackParamList, UsersStackParamList } from './src/types/stackNavigation';
 import Settings from './src/screens/Settings';
+
+import { LoginStackParamList, ProductsStackParamList, UsersStackParamList } from './src/types/stackNavigation';
+import { MainTabParamList } from './src/types/bottomTabNavigation';
+import { baseStackScreenOptions, baseTabScreenOptions } from './src/configs/screens';
 
 export default function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -25,16 +27,7 @@ export default function App() {
 
   function ProductsNav() {
     return (
-      <StackProducts.Navigator screenOptions={{
-        headerStyle: {
-          backgroundColor: '#ff7926',
-        },
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-        headerTintColor: '#000',
-      
-      }}>
+      <StackProducts.Navigator screenOptions={baseStackScreenOptions}>
         <StackProducts.Screen options={{title: 'Lista de Produtos'}} name="productsList" component={Products} />
       </StackProducts.Navigator>
     );
@@ -42,15 +35,7 @@ export default function App() {
 
   function UsersNav() {
     return (
-      <StackUsers.Navigator screenOptions={{
-        headerStyle: {
-          backgroundColor: '#ff7926',
-        },
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-        headerTintColor: '#000',
-      }}>
+      <StackUsers.Navigator screenOptions={baseStackScreenOptions}>
         <StackUsers.Screen options={{title: 'Lista de Usuários'}} name="usersList" component={Users} />
       </StackUsers.Navigator>
     );
@@ -60,29 +45,19 @@ export default function App() {
     <NavigationContainer>
       {
         isSignedIn ? (
-          <Tab.Navigator screenOptions={{
-            headerStyle: {
-              backgroundColor: '#ff7926',
-            },
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-            headerTintColor: '#000',
-          }}>
-            <Tab.Screen name="products" options={{headerShown: false}} component={ProductsNav} />
-            <Tab.Screen name="users" options={{headerShown: false}} component={UsersNav} />
+          <Tab.Navigator screenOptions={baseTabScreenOptions}>
+            <Tab.Screen name="products" options={{
+              headerShown: false,
+              tabBarLabel: 'Produtos',
+              }} component={ProductsNav} />
+            <Tab.Screen name="users" options={{
+              headerShown: false,
+              tabBarLabel: 'Usuários',
+              }} component={UsersNav} />
             <Tab.Screen name="settings" options={{title: "Configurações"}} component={Settings} initialParams={{funcSignIn: setIsSignedIn}} />
           </Tab.Navigator>
         ) : (
-          <StackLogin.Navigator screenOptions={{
-            headerStyle: {
-              backgroundColor: '#ff7926',
-            },
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-            headerTintColor: '#000',
-          }}>
+          <StackLogin.Navigator screenOptions={baseStackScreenOptions}>
             <StackLogin.Screen options={{title: 'Login'}} name="signin" component={SignIn} initialParams={{funcSignIn: setIsSignedIn}} />
             <StackLogin.Screen options={{title: 'Cadastro'}} name="signup" component={SignUp} />
           </StackLogin.Navigator>
