@@ -14,6 +14,7 @@ import Users from './src/screens/Users';
 import Products from './src/screens/Products';
 
 import { LoginStackParamList, MainTabParamList, ProductsStackParamList, UsersStackParamList } from './src/types/stackNavigation';
+import Settings from './src/screens/Settings';
 
 export default function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -59,9 +60,18 @@ export default function App() {
     <NavigationContainer>
       {
         isSignedIn ? (
-          <Tab.Navigator>
+          <Tab.Navigator screenOptions={{
+            headerStyle: {
+              backgroundColor: '#ff7926',
+            },
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerTintColor: '#000',
+          }}>
             <Tab.Screen name="products" options={{headerShown: false}} component={ProductsNav} />
             <Tab.Screen name="users" options={{headerShown: false}} component={UsersNav} />
+            <Tab.Screen name="settings" options={{title: "Configurações"}} component={Settings} initialParams={{funcSignIn: setIsSignedIn}} />
           </Tab.Navigator>
         ) : (
           <StackLogin.Navigator screenOptions={{

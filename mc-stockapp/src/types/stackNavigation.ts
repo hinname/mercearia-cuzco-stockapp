@@ -8,6 +8,7 @@ export type LoginStackParamList = {
 export type MainTabParamList = {
   products: undefined;
   users: undefined;
+  settings: {funcSignIn: (isSignedIn: boolean) => void};
 }
 
 export type ProductsStackParamList = {
@@ -22,3 +23,4 @@ export type SignInStackTypes = NativeStackScreenProps<LoginStackParamList, 'sign
 export type SignUpStackTypes = NativeStackScreenProps<LoginStackParamList, 'signup'>;
 export type ProductsStackTypes = NativeStackScreenProps<MainTabParamList, 'products'>;
 export type UsersStackTypes = NativeStackScreenProps<MainTabParamList, 'users'>;
+export type SettingsStackTypes = NativeStackScreenProps<MainTabParamList, 'settings'>;
