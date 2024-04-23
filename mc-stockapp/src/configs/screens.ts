@@ -3,20 +3,20 @@ import { NativeStackNavigationOptions } from "@react-navigation/native-stack";
 
 export const baseStackScreenOptions: NativeStackNavigationOptions = {
   headerStyle: {
-    backgroundColor: '#ff7926',
+    backgroundColor: '#0059B1',
   },
   headerTitleStyle: {
     fontWeight: 'bold',
   },
-  headerTintColor: '#000',
+  headerTintColor: '#fff',
 }
 
 export const baseTabScreenOptions: BottomTabNavigationOptions = {
   headerStyle: {
-    backgroundColor: '#ff7926',
+    backgroundColor: '#0059B1',
   },
   headerTitleStyle: {
     fontWeight: 'bold',
   },
-  headerTintColor: '#000',
+  headerTintColor: '#fff',
 }

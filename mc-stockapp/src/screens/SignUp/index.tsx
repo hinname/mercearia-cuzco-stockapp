@@ -24,8 +24,8 @@ export default function SignUp({navigation}: SignUpStackTypes) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.titleCompany}>Cadastro</Text>
-        <Text style={styles.titleApp}>Solicite acesso ao aplicativo</Text>
+        <Text style={styles.title}>Cadastro</Text>
+        <Text style={styles.titleDescription}>Solicite acesso ao aplicativo</Text>
       </View>
       <View style={styles.form}>
         <View>

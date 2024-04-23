@@ -11,14 +11,14 @@ const styles = StyleSheet.create({
     marginBottom: 60,
     alignItems: 'center',
   },
-  titleCompany: {
+  title: {
     fontSize: 32,
-    color: '#FF7926',
+    color: '#26ACFF',
     marginBottom: 12,
   },
-  titleApp: {
+  titleDescription: {
     fontSize: 24,
-    color: '#FF7926',
+    color: '#0059B1',
     marginBottom: 24,
   },
   form: {
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   button: {
-    backgroundColor: '#FF7926',
+    backgroundColor: '#26ACFF',
     width: '100%',
     padding: 16,
     borderRadius: 8,
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   linkText: {
-    color: '#FF7926',
+    color: '#26ACFF',
     fontWeight: 'bold',
     fontSize: 16,
     alignSelf: 'center',

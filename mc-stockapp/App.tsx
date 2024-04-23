@@ -17,6 +17,7 @@ import Settings from './src/screens/Settings';
 import { LoginStackParamList, ProductsStackParamList, UsersStackParamList } from './src/types/stackNavigation';
 import { MainTabParamList } from './src/types/bottomTabNavigation';
 import { baseStackScreenOptions, baseTabScreenOptions } from './src/configs/screens';
+import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -63,6 +64,7 @@ export default function App() {
           </StackLogin.Navigator>
         )
       }
+      <StatusBar style="light" />
     </NavigationContainer>
   );
 }

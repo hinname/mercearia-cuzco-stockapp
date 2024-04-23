@@ -8,11 +8,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   OptionsText: {
-    color: '#FF7926',
+    color: '#26ACFF',
     fontSize: 24,
   },
   logoutButton: {
-    backgroundColor: '#FF7926',
+    backgroundColor: '#26ACFF',
     width: '50%',
     padding: 16,
     borderRadius: 8,
