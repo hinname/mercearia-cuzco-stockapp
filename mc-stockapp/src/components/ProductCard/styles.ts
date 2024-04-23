@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   product: {
     backgroundColor: '#1E1B26',
     padding: 16,
@@ -13,10 +13,12 @@ export const styles = StyleSheet.create({
   },
   productPrice: {
     color: '#fdfcfe',
-    fontSize: 16,
+    fontSize: 14,
   },
   productQtd: {
     color: '#fdfcfe',
-    fontSize: 16,
+    fontSize: 12,
   }
 });
+
+export default styles;

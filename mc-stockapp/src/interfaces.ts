@@ -4,3 +4,10 @@ export interface IProduct {
   price: number;
   qtd: number;
 }
+
+export interface IUser {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+}
