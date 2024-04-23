@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 import { IProduct } from '../../interfaces';
+import ProductCard from '../../components/ProductCard';
 
 export default function Products() {
   const [products, setProducts] = useState<IProduct[]>([
@@ -20,12 +21,8 @@ export default function Products() {
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
       {
-        products.map((product, index) => (
-          <View key={index} style={styles.product}>
-            <Text style={styles.productName}>{product.name}</Text>
-            <Text style={styles.productPrice}>{product.price}</Text>
-            <Text style={styles.productQtd}>{product.qtd}</Text>
-          </View>
+        products.map((product) => (
+          <ProductCard key={product.id} product={product} />
         ))
       }
       </ScrollView>
