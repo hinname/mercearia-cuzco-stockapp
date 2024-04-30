@@ -15,7 +15,7 @@ export default function ProductCard(props: Props) {
         <Text style={styles.userName}>{props.user.name}</Text>
         <Text style={styles.userEmail}>{props.user.email}</Text>
       </View>
-      <TouchableOpacity style={styles.selectButton}>
+      <TouchableOpacity style={styles.editButton}>
         <Ionicon name="create" size={24} color="#26ACFF" />
       </TouchableOpacity>
     </View>

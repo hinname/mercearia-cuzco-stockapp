@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     color: '#fdfcfe',
     fontSize: 16,
   },
-  selectButton: {
+  editButton: {
     borderColor: '#26ACFF',
     borderWidth: 1,
     padding: 20,
