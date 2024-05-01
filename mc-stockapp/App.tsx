@@ -13,11 +13,13 @@ import SignUp from './src/screens/SignUp';
 import Users from './src/screens/Users';
 import Products from './src/screens/Products';
 import Settings from './src/screens/Settings';
+import FormProduct from './src/screens/FormProduct';
 
 import { LoginStackParamList, ProductsStackParamList, UsersStackParamList } from './src/types/stackNavigation';
 import { MainTabParamList } from './src/types/bottomTabNavigation';
 import { baseStackScreenOptions, baseTabScreenOptions } from './src/configs/screens';
 import { StatusBar } from 'expo-status-bar';
+
 
 export default function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -29,7 +31,8 @@ export default function App() {
   function ProductsNav() {
     return (
       <StackProducts.Navigator screenOptions={baseStackScreenOptions}>
-        <StackProducts.Screen options={{title: 'Lista de Produtos'}} name="productsList" component={Products} />
+        <StackProducts.Screen options={{title: 'Lista de Produtos'}} name='productsList' component={Products} />
+        <StackProducts.Screen options={{title: 'Formulário de Produtos', headerBackTitle: 'Voltar'}} name='formProduct' component={FormProduct} />
       </StackProducts.Navigator>
     );
   }
@@ -37,7 +40,7 @@ export default function App() {
   function UsersNav() {
     return (
       <StackUsers.Navigator screenOptions={baseStackScreenOptions}>
-        <StackUsers.Screen options={{title: 'Lista de Usuários'}} name="usersList" component={Users} />
+        <StackUsers.Screen options={{title: 'Lista de Usuários'}} name='usersList' component={Users} />
       </StackUsers.Navigator>
     );
   }

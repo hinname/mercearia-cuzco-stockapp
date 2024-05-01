@@ -7,6 +7,7 @@ export type LoginStackParamList = {
 
 export type ProductsStackParamList = {
   productsList: undefined;
+  formProduct: undefined;
 }
 
 export type UsersStackParamList = {
@@ -15,3 +16,4 @@ export type UsersStackParamList = {
 
 export type SignInStackTypes = NativeStackScreenProps<LoginStackParamList, 'signin'>;
 export type SignUpStackTypes = NativeStackScreenProps<LoginStackParamList, 'signup'>;
+export type ProductsListStackTypes = NativeStackScreenProps<ProductsStackParamList, 'productsList'>;
