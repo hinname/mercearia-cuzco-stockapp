@@ -11,7 +11,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 16,
-    marginBottom: 16,
   },
   input: {
     backgroundColor: '#1E1B26',
@@ -32,6 +31,16 @@ export const styles = StyleSheet.create({
     color: '#131016',
     fontWeight: 'bold',
     fontSize: 16,
+  },
+  addButton: {
+    backgroundColor: '#26ACFF',
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '90%',
+    justifyContent: 'center',
   }
 });
 
