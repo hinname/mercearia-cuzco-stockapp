@@ -3,13 +3,13 @@ import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 
 export default function FormProduct() {
-  const [isEditingProduct, setIsEditingProduct] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>
           {
-            isEditingProduct ? 'Editar Produto' : 'Cadastrar Produto'
+            isUpdate ? 'Editar Produto' : 'Cadastrar Produto'
           }
         </Text>
       </View>
@@ -33,7 +33,7 @@ export default function FormProduct() {
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>
             {
-              isEditingProduct ? 'Editar' : 'Cadastrar'
+              isUpdate ? 'Editar' : 'Cadastrar'
             }
           </Text>
         </TouchableOpacity>
