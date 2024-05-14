@@ -1,8 +1,13 @@
 import { fastify } from "fastify";
 import { userRoutes } from "./routes/user.routes";
 import { productRoutes } from "./routes/product.routes";
+import fastifyJwt from "@fastify/jwt";
 
 const server = fastify();
+
+server.register(fastifyJwt, {
+  secret : process.env.API_SECRET as string,
+});
 
 server.register(userRoutes, {
   prefix: "/users",

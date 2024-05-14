@@ -1,4 +1,4 @@
-import { User, UserCreate, UserRepository } from "../interfaces/user.interface";
+import { User, UserCreate, UserLogin, UserRepository } from "../interfaces/user.interface";
 import { UserRepositoryPrisma } from "../repositories/user.repository";
 
 class UserUseCase {
@@ -9,7 +9,7 @@ class UserUseCase {
 
   async createUser(user: UserCreate): Promise<User> {
     const verifyUser = await this.userRepository.findByEmail(user.email);
-    if(verifyUser) {
+    if(!verifyUser) {
       throw new Error('User already exists');
     }
     return await this.userRepository.create(user);
@@ -17,6 +17,14 @@ class UserUseCase {
 
   async getUserByEmail(email: string): Promise<User | null>{
     return await this.userRepository.findByEmail(email);
+  }
+
+  async login(user: UserLogin): Promise<User | null> {
+    const loginUser = await this.userRepository.login(user);
+    if(!loginUser) {
+      throw new Error('User or password incorrect');
+    }
+    return loginUser;
   }
 }
 

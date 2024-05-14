@@ -1,5 +1,5 @@
 import { prisma } from "../database/prisma-client";
-import { User, UserCreate, UserRepository } from "../interfaces/user.interface";
+import { User, UserCreate, UserLogin, UserRepository } from "../interfaces/user.interface";
 
 class UserRepositoryPrisma implements UserRepository {
   async create(data: UserCreate): Promise<User> {
@@ -17,6 +17,16 @@ class UserRepositoryPrisma implements UserRepository {
     const result = await prisma.user.findUnique({
       where: {
         email
+      }
+    })
+    return result;
+  }
+
+  async login (data: UserLogin): Promise<User | null> {
+    const result = await prisma.user.findFirst({
+      where: {
+        email: data.email,
+        password: data.password
       }
     })
     return result;
