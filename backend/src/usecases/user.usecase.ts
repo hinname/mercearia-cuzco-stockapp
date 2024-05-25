@@ -14,6 +14,12 @@ class UserUseCase {
       throw new Error('User already exists');
     }
 
+    bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS as string), (err, salt) => {
+      bcrypt.hash(user.password, salt, async (err, hash) => {
+        user.password = hash;
+      });
+    })
+
     return await this.userRepository.create(user);
   }
 
@@ -22,6 +28,17 @@ class UserUseCase {
   }
 
   async login(user: UserLogin): Promise<User | null> {
+
+    const userExists = await this.userRepository.findByEmail(user.email);
+    if(!userExists) {
+      throw new Error('User or password incorrect');
+    }
+    
+    const comparePassword = await bcrypt.compare(user.password, userExists.password);
+    if(!comparePassword) {
+      throw new Error('User or password incorrect');
+    }
+
     const loginUser = await this.userRepository.login(user);
     if(!loginUser) {
       throw new Error('User or password incorrect');
