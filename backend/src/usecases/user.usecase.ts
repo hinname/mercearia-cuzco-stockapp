@@ -1,5 +1,6 @@
 import { User, UserCreate, UserLogin, UserRepository } from "../interfaces/user.interface";
 import { UserRepositoryPrisma } from "../repositories/user.repository";
+import bcrypt from 'bcrypt';
 
 class UserUseCase {
   private userRepository: UserRepository;
@@ -12,6 +13,7 @@ class UserUseCase {
     if(!verifyUser) {
       throw new Error('User already exists');
     }
+
     return await this.userRepository.create(user);
   }
 

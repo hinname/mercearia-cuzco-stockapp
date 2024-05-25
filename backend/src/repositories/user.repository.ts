@@ -7,6 +7,7 @@ class UserRepositoryPrisma implements UserRepository {
       data: {
         email: data.email,
         userName: data.userName,
+        phoneNumber: data.phoneNumber,
         password: data.password
       }
     })
