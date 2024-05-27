@@ -7,16 +7,24 @@ class ProductUseCase {
     this.productRepository = new ProductRepositoryPrisma();
   }
 
-  async CreateProduct(product: ProductCreate): Promise<Product> {
-    return await this.productRepository.create(product);
+  async getAllProducts(): Promise<Product[]> {
+    return await this.productRepository.findAll();
   }
 
-  async SearchProductByName(name: string): Promise<Product[] | null> {
+  async getProductById(id: string): Promise<Product | null> {
+    return await this.productRepository.findById(id);
+  }
+
+  async searchProductByName(name: string): Promise<Product[] | null> {
     return await this.productRepository.searchByName(name);
   }
 
-  async EditProduct(product: Product): Promise<Product> {
-    return await this.productRepository.edit(product);
+  async createProduct(product: ProductCreate): Promise<Product> {
+    return await this.productRepository.create(product);
+  }
+
+  async updateProduct(id: string, product: ProductCreate): Promise<Product> {
+    return await this.productRepository.update(id, product);
   }
 }
 

@@ -2,6 +2,20 @@ import { prisma } from "../database/prisma-client";
 import { Product, ProductCreate, ProductRepository } from "../interfaces/products.interface";
 
 class ProductRepositoryPrisma implements ProductRepository {
+  async findAll(): Promise<Product[]> {
+    const result = await prisma.product.findMany();
+    return result;
+  };
+
+  async findById(id: string): Promise<Product | null> {
+    const result = await prisma.product.findUnique({
+      where: {
+        id: id
+      }
+    })
+    return result;
+  };
+
   async create(data: ProductCreate): Promise<Product> {
     const result = await prisma.product.create({
       data: {
@@ -15,6 +29,7 @@ class ProductRepositoryPrisma implements ProductRepository {
     })
     return result;
   };
+
   async searchByName(name: string): Promise<Product[] | null> {
     const result = await prisma.product.findMany({
       where: {
@@ -25,7 +40,8 @@ class ProductRepositoryPrisma implements ProductRepository {
     })
     return result;
   };
-  async edit(data: Product): Promise<Product> {
+
+  async update(id: string, data: Product): Promise<Product> {
     const result = await prisma.product.update({
       where: {
         id: data.id

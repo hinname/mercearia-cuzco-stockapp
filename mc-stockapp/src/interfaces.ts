@@ -1,13 +1,32 @@
 export interface IProduct {
-  id: number;
+  id: string;
   name: string;
+  description: string | null;
   price: number;
-  qtd: number;
+  stockQuantity: number;
+  minStockQuantity: number;
+  userId: string;
+}
+
+export interface IProductCreate {
+  name: string;
+  description: string | null;
+  price: number;
+  stockQuantity: number;
+  minStockQuantity: number;
 }
 
 export interface IUser {
-  id: number;
-  name: string;
+  id: string;
   email: string;
+  userName: string;
+  phoneNumber: number;
+  password: string;
+}
+
+export interface IUserCreate {
+  email: string;
+  userName: string;
+  phoneNumber: number;
   password: string;
 }

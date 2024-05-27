@@ -18,7 +18,9 @@ export interface ProductCreate {
 }
 
 export interface ProductRepository {
+  findAll(): Promise<Product[]>;
+  findById(id: string): Promise<Product | null>;
   create(data: ProductCreate): Promise<Product>;
+  update(id: string, data: ProductCreate): Promise<Product>;
   searchByName(name: string): Promise<Product[] | null>;
-  edit(data: Product): Promise<Product>;
 }

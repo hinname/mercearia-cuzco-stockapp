@@ -2,13 +2,26 @@ import { prisma } from "../database/prisma-client";
 import { User, UserCreate, UserLogin, UserRepository } from "../interfaces/user.interface";
 
 class UserRepositoryPrisma implements UserRepository {
-  async create(data: UserCreate): Promise<User> {
-    const result = await prisma.user.create({
-      data: {
+
+  async login (data: UserLogin): Promise<User | null> {
+    const result = await prisma.user.findFirst({
+      where: {
         email: data.email,
-        userName: data.userName,
-        phoneNumber: data.phoneNumber,
         password: data.password
+      }
+    })
+    return result;
+  }
+
+  async findAll(): Promise<User[]> {
+    const result = await prisma.user.findMany();
+    return result;
+  }
+
+  async findById(id: string): Promise<User | null> {
+    const result = await prisma.user.findUnique({
+      where: {
+        id
       }
     })
     return result;
@@ -23,10 +36,38 @@ class UserRepositoryPrisma implements UserRepository {
     return result;
   }
 
-  async login (data: UserLogin): Promise<User | null> {
-    const result = await prisma.user.findFirst({
+  async searchByName(userName: string): Promise<User[]> {
+    const result = await prisma.user.findMany({
       where: {
+        userName: {
+          contains: userName
+        }
+      }
+    })
+    return result;
+  }
+
+  async create(data: UserCreate): Promise<User> {
+    const result = await prisma.user.create({
+      data: {
         email: data.email,
+        userName: data.userName,
+        phoneNumber: data.phoneNumber,
+        password: data.password
+      }
+    })
+    return result;
+  }
+
+  async update(id: string, data: UserCreate): Promise<User | null> {
+    const result = await prisma.user.update({
+      where: {
+        id
+      },
+      data: {
+        email: data.email,
+        userName: data.userName,
+        phoneNumber: data.phoneNumber,
         password: data.password
       }
     })

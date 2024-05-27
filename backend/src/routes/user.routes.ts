@@ -5,23 +5,6 @@ import { authMiddleware } from "../middlewares/auth.middleware";
 
 export async function userRoutes(fastify: FastifyInstance) {
   const userUseCase = new UserUseCase();
-  fastify.post<{Body: UserCreate}>('/', {onRequest: authMiddleware}, async (req, reply) => {
-    try {
-      const data = await userUseCase.createUser(req.body);
-      return reply.send(data);
-    } catch(err) {
-      reply.send(err)
-    }
-  })
-
-  fastify.post<{Body: {email: string}}>('/find', {onRequest: authMiddleware}, async (req, reply) => {
-    try {
-      const data = await userUseCase.getUserByEmail(req.body.email);
-      return reply.send(data);
-    } catch(err) {
-      reply.send(err)
-    }
-  })
 
   fastify.post<{Body: UserLogin}>('/login', async (req, reply) => {
     let user = null;
@@ -37,5 +20,54 @@ export async function userRoutes(fastify: FastifyInstance) {
     } catch(err) {
       return reply.status(500).send({msg: 'Falha interna', err});
     }
-  })
+  });
+
+  fastify.get('/', {onRequest: authMiddleware}, async (req, reply) => {
+    try {
+      const data = await userUseCase.getUsers();
+      return reply.send(data);
+    } catch(err) {
+      reply.send(err)
+    }
+  });
+
+  fastify.get<{Params: {id: string}}>
+    ('/:id', {onRequest: authMiddleware}, async (req, reply) => {
+    try {
+      const data = await userUseCase.getUserById(req.params.id);
+      return reply.send(data);
+    } catch(err) {
+      reply.send(err)
+    }
+  });
+
+  fastify.post<{Body: {userName: string}}>
+  ('/search', {onRequest: authMiddleware}, async (req, reply) => {
+    try {
+      const data = await userUseCase.searchUsersByName(req.body.userName);
+      return reply.send(data);
+    } catch(err) {
+      reply.send(err)
+    }
+  });
+
+  fastify.post<{Body: UserCreate}>
+  ('/', {onRequest: authMiddleware}, async (req, reply) => {
+    try {
+      const data = await userUseCase.createUser(req.body);
+      return reply.send(data);
+    } catch(err) {
+      reply.send(err)
+    }
+  });
+
+  fastify.put<{Body: UserCreate, Params: {id: string}}>
+  ('/:id', {onRequest: authMiddleware}, async (req, reply) => {
+    try {
+      const data = await userUseCase.updateUser(req.params.id, req.body);
+      return reply.send(data);
+    } catch(err) {
+      reply.send(err)
+    }
+  });
 }

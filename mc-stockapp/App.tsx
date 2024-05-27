@@ -64,7 +64,6 @@ export default function App() {
         ) : (
           <StackLogin.Navigator screenOptions={baseStackScreenOptions}>
             <StackLogin.Screen options={{title: 'Login'}} name="signin" component={SignIn} initialParams={{funcSignIn: setIsSignedIn}} />
-            <StackLogin.Screen options={{title: 'Cadastro'}} name="signup" component={SignUp} />
           </StackLogin.Navigator>
         )
       }
