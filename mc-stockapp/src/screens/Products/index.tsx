@@ -1,17 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 import { IProduct } from '../../interfaces';
 import ProductCard from '../../components/ProductCard';
 import { ProductsListStackTypes } from '../../types/stackNavigation';
+import { getProducts } from '../../services/requests/products.requests';
 
 export default function Products({ navigation, route } : ProductsListStackTypes) {
-  const [products, setProducts] = useState<IProduct[]>([
-    { id: 1, name: 'Produto 1', price: 10.00, qtd: 10 },
-    { id: 2, name: 'Produto 2', price: 10.00, qtd: 10 },
-    { id: 3, name: 'Produto 3', price: 10.00, qtd: 10 },
-    { id: 4, name: 'Produto 4', price: 10.00, qtd: 10 },
-  ]);
+  const [products, setProducts] = useState<IProduct[] | null>([]);
+  const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    fetchProducts();
+  },[]);
+
+  async function fetchProducts() {
+    const data = await getProducts();
+    if (!data) {
+      alert('Erro ao buscar produtos');
+    }
+    setProducts(data);
+  }
 
   function handleNavigateToFormProduct() {
     navigation.navigate('formProduct');
@@ -19,7 +28,13 @@ export default function Products({ navigation, route } : ProductsListStackTypes)
   return (
     <View style={styles.container}>
       <View style={styles.search}>
-        <TextInput style={styles.input} placeholder='Nome do produto' placeholderTextColor={'#7E7E7F'} />
+        <TextInput 
+          style={styles.input} 
+          placeholder='Nome do produto' 
+          placeholderTextColor={'#7E7E7F'}
+          value={search}
+          onChangeText={setSearch}
+        />
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Buscar</Text>
         </TouchableOpacity>  
@@ -29,7 +44,7 @@ export default function Products({ navigation, route } : ProductsListStackTypes)
       </TouchableOpacity>
       <ScrollView showsVerticalScrollIndicator={false}>
       {
-        products.map((product) => (
+        products?.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))
       }

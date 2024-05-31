@@ -3,6 +3,7 @@ import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 import { SignInStackTypes } from '../../types/stackNavigation';
 import { postLoginUser } from '../../services/requests/users.requests';
+import { setItem } from '../../services/storage';
 
 export default function SignIn({ navigation, route }: SignInStackTypes) {
   const [email, setEmail] = useState('');
@@ -18,7 +19,7 @@ export default function SignIn({ navigation, route }: SignInStackTypes) {
       Alert.alert('Usuário ou senha incorretos!');
       return;
     }
-
+    await setItem('token', data);
     route.params.funcSignIn(true);
   }
 

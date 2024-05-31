@@ -28,8 +28,8 @@ export async function productRoutes(fastify: FastifyInstance) {
   fastify.post<{Body: ProductCreate}>
   ('/', {onRequest: authMiddleware}, async (req, reply) => {
     try {
-      const product = await productUseCase.createProduct(req.body);
-      reply.code(201).send(product);
+      await productUseCase.createProduct(req.body);
+      reply.code(201).send("Product created");
     } catch (err) {
       reply.send(err);
     }

@@ -19,8 +19,8 @@ class ProductUseCase {
     return await this.productRepository.searchByName(name);
   }
 
-  async createProduct(product: ProductCreate): Promise<Product> {
-    return await this.productRepository.create(product);
+  async createProduct(product: ProductCreate): Promise<void> {
+    await this.productRepository.create(product);
   }
 
   async updateProduct(id: string, product: ProductCreate): Promise<Product> {

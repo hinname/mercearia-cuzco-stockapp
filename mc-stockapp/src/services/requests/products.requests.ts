@@ -1,9 +1,11 @@
 import { IProduct, IProductCreate } from "../../interfaces";
 import api from "../api";
+import getHeaders from "./headers";
 
 export async function getProducts(): Promise<IProduct[] | null>{
   try {
-    const response = await api.get('/products');
+    const headers = await getHeaders();
+    const response = await api.get('/products', { headers: headers});
     return response.data;
   } catch (error) {
     return null;
@@ -12,7 +14,8 @@ export async function getProducts(): Promise<IProduct[] | null>{
 
 export async function getProductById(id: string): Promise<IProduct | null>{
   try {
-    const response = await api.get(`/products/${id}`);
+    const headers = await getHeaders();
+    const response = await api.get(`/products/${id}`, {headers: headers});
     return response.data;
   } catch (error) {
     return null;
@@ -21,7 +24,8 @@ export async function getProductById(id: string): Promise<IProduct | null>{
 
 export async function postProduct(product: IProductCreate): Promise<IProduct | null>{
   try {
-    const response = await api.post('/products', product);
+    const headers = await getHeaders();
+    const response = await api.post('/products', product, {headers: headers});
     return response.data;
   } catch (error) {
     return null;
@@ -30,7 +34,8 @@ export async function postProduct(product: IProductCreate): Promise<IProduct | n
 
 export async function putProduct(id: string, product: IProductCreate): Promise<IProduct | null>{
   try {
-    const response = await api.put(`/products/${id}`, product);
+    const headers = await getHeaders();
+    const response = await api.put(`/products/${id}`, product, {headers: headers});
     return response.data;
   } catch (error) {
     return null;
@@ -39,7 +44,8 @@ export async function putProduct(id: string, product: IProductCreate): Promise<I
 
 export async function postSearchProduct(name: string): Promise<IProduct[] | null>{
   try {
-    const response = await api.post('/products/search', { name });
+    const headers = await getHeaders();
+    const response = await api.post('/products/search', { name }, {headers: headers});
     return response.data;
   } catch (error) {
     return null;

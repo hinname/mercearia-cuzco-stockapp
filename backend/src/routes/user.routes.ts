@@ -54,8 +54,8 @@ export async function userRoutes(fastify: FastifyInstance) {
   fastify.post<{Body: UserCreate}>
   ('/', {onRequest: authMiddleware}, async (req, reply) => {
     try {
-      const data = await userUseCase.createUser(req.body);
-      return reply.send(data);
+      await userUseCase.createUser(req.body);
+      return reply.send("User created");
     } catch(err) {
       reply.send(err)
     }
