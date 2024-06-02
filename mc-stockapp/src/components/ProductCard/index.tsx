@@ -21,7 +21,7 @@ export default function ProductCard(props: Props) {
       <View style={styles.productData}>
         <Text style={styles.productName}>{props.product.name}</Text>
         <Text style={styles.productPrice}>R$ {props.product.price}</Text>
-        <Text style={styles.productQtd}>quantidade: {props.product.qtd}</Text>
+        <Text style={styles.productQtd}>quantidade: {props.product.stockQuantity}</Text>
       </View>
       <TouchableOpacity style={styles.editButton} onPress={handleNavigateToFormProduct}>
         <Ionicon name="create" size={24} color="#26ACFF" />

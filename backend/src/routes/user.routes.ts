@@ -15,7 +15,7 @@ export async function userRoutes(fastify: FastifyInstance) {
     }
 
     try {
-      const token = await reply.jwtSign({id: user?.id, login: user?.email}, {expiresIn: '12h'});
+      const token = await reply.jwtSign({id: user?.id, email: user?.email}, {expiresIn: '12h'});
       return reply.send({token});
     } catch(err) {
       return reply.status(500).send({msg: 'Falha interna', err});

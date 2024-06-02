@@ -2,9 +2,12 @@ import { FastifyInstance } from "fastify";
 import { ProductUseCase } from "../usecases/product.usecase";
 import { Product, ProductCreate } from "../interfaces/products.interface";
 import { authMiddleware } from "../middlewares/auth.middleware";
+import { UserUseCase } from "../usecases/user.usecase";
+import { jwtPayload } from "../interfaces/jwt.interface";
 
 export async function productRoutes(fastify: FastifyInstance) {
   const productUseCase = new ProductUseCase();
+  const userUseCase = new UserUseCase();
 
   fastify.get('/', {onRequest: authMiddleware}, async (req, reply) => {
     try {
@@ -28,9 +31,12 @@ export async function productRoutes(fastify: FastifyInstance) {
   fastify.post<{Body: ProductCreate}>
   ('/', {onRequest: authMiddleware}, async (req, reply) => {
     try {
+      const token = await req.jwtDecode() as jwtPayload;
+      req.body.userId = token.id;
       await productUseCase.createProduct(req.body);
       reply.code(201).send("Product created");
     } catch (err) {
+      console.log(err)
       reply.send(err);
     }
   });

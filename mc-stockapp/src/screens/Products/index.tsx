@@ -1,18 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 import { IProduct } from '../../interfaces';
 import ProductCard from '../../components/ProductCard';
 import { ProductsListStackTypes } from '../../types/stackNavigation';
 import { getProducts } from '../../services/requests/products.requests';
+import React from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function Products({ navigation, route } : ProductsListStackTypes) {
   const [products, setProducts] = useState<IProduct[] | null>([]);
   const [search, setSearch] = useState('');
 
-  useEffect(() => {
-    fetchProducts();
-  },[]);
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchProducts();
+    }, [])
+  )
 
   async function fetchProducts() {
     const data = await getProducts();
@@ -23,7 +27,7 @@ export default function Products({ navigation, route } : ProductsListStackTypes)
   }
 
   function handleNavigateToFormProduct() {
-    navigation.navigate('formProduct');
+    navigation.navigate('formProduct', {});
   }
   return (
     <View style={styles.container}>

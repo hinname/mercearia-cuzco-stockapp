@@ -27,6 +27,6 @@ export interface IUser {
 export interface IUserCreate {
   email: string;
   userName: string;
-  phoneNumber: number;
+  phoneNumber: string;
   password: string;
 }
