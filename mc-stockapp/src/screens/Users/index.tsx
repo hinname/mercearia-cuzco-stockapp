@@ -4,14 +4,27 @@ import styles from './styles';
 import { IUser } from '../../interfaces';
 import UserCard from '../../components/UserCard';
 import { UsersListStackTypes } from '../../types/stackNavigation';
+import { getUsers } from '../../services/requests/users.requests';
+import { useFocusEffect } from '@react-navigation/native';
+import React from 'react';
 
 export default function Users({ navigation, route} : UsersListStackTypes) {
-  const [users, setUsers] = useState<IUser[]>([
-    { id: 1, name: 'Usuário 1', email: 'teste@test.com', password: 'rvbreivbreng' },
-    { id: 2, name: 'Usuário 2', email: 'teste@test.com', password: 'rvbreivbreng' },
-    { id: 3, name: 'Usuário 3', email: 'teste@test.com', password: 'rvbreivbreng' },
-    { id: 4, name: 'Usuário 4', email: 'teste@test.com', password: 'rvbreivbreng' },
-  ]);
+  const [users, setUsers] = useState<IUser[] | null>([]);
+  const [search, setSearch] = useState('');
+
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchUsers();
+    }, [])
+  )
+
+  async function fetchUsers() {
+    const data = await getUsers();
+    if (!data) {
+      alert('Erro ao buscar produtos');
+    }
+    setUsers(data);
+  }
 
   function handleNavigateToFormProduct() {
     navigation.navigate('formUser');
@@ -20,7 +33,13 @@ export default function Users({ navigation, route} : UsersListStackTypes) {
   return (
     <View style={styles.container}>
       <View style={styles.search}>
-        <TextInput style={styles.input} placeholder='Nome do usuário' placeholderTextColor={'#7E7E7F'} />
+        <TextInput 
+          style={styles.input} 
+          placeholder='Nome do usuário' 
+          placeholderTextColor={'#7E7E7F'} 
+          value={search}
+          onChangeText={setSearch}
+        />
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Buscar</Text>
         </TouchableOpacity>  
@@ -30,7 +49,7 @@ export default function Users({ navigation, route} : UsersListStackTypes) {
       </TouchableOpacity>
       <ScrollView showsVerticalScrollIndicator={false}>
       {
-        users.map((user) => (
+        users?.map((user) => (
           <UserCard key={user.id} user={user} />
         ))
       }

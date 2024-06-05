@@ -32,11 +32,21 @@ export default function SignIn({ navigation, route }: SignInStackTypes) {
       <View style={styles.form}>
         <View>
           <Text style={styles.inputText}>Email</Text>
-          <TextInput style={styles.input} keyboardType='email-address' onChangeText={setEmail} />
+          <TextInput 
+            style={styles.input} 
+            keyboardType='email-address' 
+            onChangeText={setEmail}
+            autoCapitalize='none'
+          />
         </View>
         <View>
           <Text style={styles.inputText}>Senha</Text>
-          <TextInput secureTextEntry={true} style={styles.input} onChangeText={setPassword} />
+          <TextInput 
+            secureTextEntry={true} 
+            style={styles.input} 
+            onChangeText={setPassword} 
+            autoCapitalize='none'
+          />
         </View>
         <TouchableOpacity style={styles.button} onPress={handleSignInSubmit}>
           <Text style={styles.buttonText}>Entrar</Text>

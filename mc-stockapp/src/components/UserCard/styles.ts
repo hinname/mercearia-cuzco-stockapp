@@ -15,11 +15,11 @@ const styles = StyleSheet.create({
   },
   userName: {
     color: '#26ACFF',
-    fontSize: 16,
+    fontSize: 18,
   },
   userEmail: {
     color: '#fdfcfe',
-    fontSize: 16,
+    fontSize: 14,
   },
   editButton: {
     borderColor: '#26ACFF',

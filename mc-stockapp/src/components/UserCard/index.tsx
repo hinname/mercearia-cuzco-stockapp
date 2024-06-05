@@ -17,7 +17,7 @@ export default function ProductCard(props: Props) {
   return (
     <View style={styles.user}>
       <View style={styles.userData}>
-        <Text style={styles.userName}>{props.user.name}</Text>
+        <Text style={styles.userName}>{props.user.userName}</Text>
         <Text style={styles.userEmail}>{props.user.email}</Text>
       </View>
       <TouchableOpacity style={styles.editButton} onPress={handleNavigateToFormUser}>

@@ -66,6 +66,7 @@ export default function FormUser({ navigation, route } : FormUserStackTypes) {
             keyboardType='email-address' 
             value={email}
             onChangeText={setEmail}
+            autoCapitalize='none'
           />
         </View>
         <View>
@@ -81,9 +82,9 @@ export default function FormUser({ navigation, route } : FormUserStackTypes) {
           <Text style={styles.inputText}>Senha</Text>
           <TextInput 
             style={styles.input} 
-            secureTextEntry={true}
             value={password}
             onChangeText={setPassword}
+            autoCapitalize='none'
           />
         </View>
         <TouchableOpacity style={styles.button} onPress={isUpdate? handleUpdateProduct : handleCreateProduct}>
