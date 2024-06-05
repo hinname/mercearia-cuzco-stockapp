@@ -23,8 +23,8 @@ class ProductUseCase {
     await this.productRepository.create(product);
   }
 
-  async updateProduct(id: string, product: ProductCreate): Promise<Product> {
-    return await this.productRepository.update(id, product);
+  async updateProduct(id: string, product: ProductCreate): Promise<void> {
+    await this.productRepository.update(id, product);
   }
 }
 

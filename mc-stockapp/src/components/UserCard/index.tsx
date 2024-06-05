@@ -11,8 +11,9 @@ type Props = {
 
 export default function ProductCard(props: Props) {
   const navigation = useNavigation<any>();
+  
   function handleNavigateToFormUser() {
-    navigation.navigate('formUser');
+    navigation.navigate('formUser', { userId: props.user.id });
   }
   return (
     <View style={styles.user}>

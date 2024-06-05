@@ -49,17 +49,21 @@ class UserUseCase {
     })
   }
   
-  async updateUser(id: string, user: UserCreate): Promise<User | null> {
+  async updateUser(id: string, user: UserCreate): Promise<void> {
     const verifyUser = await this.userRepository.findById(id);
     if(!verifyUser) {
       throw new Error('User not found');
     }
-    bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS as string), (err, salt) => {
-      bcrypt.hash(user.password, salt, async (err, hash) => {
-        user.password = hash;
-      });
-    })
-    return await this.userRepository.update(id, user);
+    if (user.password) {
+      bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS as string), (err, salt) => {
+        bcrypt.hash(user.password, salt, async (err, hash) => {
+          user.password = hash;
+          await this.userRepository.update(id, user);
+          return;
+        });
+      })
+    }
+    await this.userRepository.updateWithoutPassword(id, user);
   }
 }
 

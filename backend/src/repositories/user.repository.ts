@@ -73,6 +73,20 @@ class UserRepositoryPrisma implements UserRepository {
     })
     return result;
   }
+
+  async updateWithoutPassword(id: string, data: UserCreate): Promise<User | null> {
+    const result = await prisma.user.update({
+      where: {
+        id
+      },
+      data: {
+        email: data.email,
+        userName: data.userName,
+        phoneNumber: data.phoneNumber
+      }
+    })
+    return result;
+  }
 }
 
 export { UserRepositoryPrisma }

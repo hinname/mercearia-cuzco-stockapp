@@ -64,8 +64,8 @@ export async function userRoutes(fastify: FastifyInstance) {
   fastify.put<{Body: UserCreate, Params: {id: string}}>
   ('/:id', {onRequest: authMiddleware}, async (req, reply) => {
     try {
-      const data = await userUseCase.updateUser(req.params.id, req.body);
-      return reply.send(data);
+      await userUseCase.updateUser(req.params.id, req.body);
+      return reply.send("User updated");
     } catch(err) {
       reply.send(err)
     }

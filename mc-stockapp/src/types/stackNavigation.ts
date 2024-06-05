@@ -11,7 +11,7 @@ export type ProductsStackParamList = {
 
 export type UsersStackParamList = {
   usersList: undefined;
-  formUser: undefined;
+  formUser: {userId?: string};
 }
 
 export type SignInStackTypes = NativeStackScreenProps<LoginStackParamList, 'signin'>;

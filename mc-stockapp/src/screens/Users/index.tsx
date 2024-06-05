@@ -27,7 +27,7 @@ export default function Users({ navigation, route} : UsersListStackTypes) {
   }
 
   function handleNavigateToFormProduct() {
-    navigation.navigate('formUser');
+    navigation.navigate('formUser', {});
   }
 
   return (

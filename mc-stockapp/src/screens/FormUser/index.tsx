@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 
 import styles from './styles';
 import { IUserCreate } from '../../interfaces';
-import { postUser } from '../../services/requests/users.requests';
+import { getUserById, postUser, putUser } from '../../services/requests/users.requests';
 import { FormUserStackTypes } from '../../types/stackNavigation';
 
 export default function FormUser({ navigation, route } : FormUserStackTypes) {
@@ -13,8 +13,48 @@ export default function FormUser({ navigation, route } : FormUserStackTypes) {
   const [password, setPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
 
-  async function handleUpdateProduct() {
+  useEffect(() => {
+    if (route.params?.userId) {
+      setIsUpdate(true);
+      fetchUser();
+    }
+  }
+  , []);
 
+  async function fetchUser() {
+    const data = await getUserById(route.params.userId ?? '');
+    if (!data) {
+      alert('Erro ao buscar usuário');
+      navigation.goBack();
+      return;
+    }
+    setUserName(data.userName);
+    setEmail(data.email);
+    setPhoneNumber(data.phoneNumber.toString());
+  }
+
+  async function handleUpdateProduct() {
+    if (!route.params?.userId) {
+      alert('Erro ao buscar usuário');
+      navigation.goBack();
+      return;
+    }
+
+    const user: IUserCreate = {
+      userName,
+      email,
+      phoneNumber,
+      password
+    }
+
+    const data = await putUser(route.params.userId, user);
+    if (!data) {
+      Alert.alert('Erro ao editar usuário');
+      navigation.goBack();
+      return;
+    }
+    Alert.alert('Usuário editado com sucesso!');
+    navigation.goBack();
   }
 
   async function handleCreateProduct() {
@@ -79,6 +119,8 @@ export default function FormUser({ navigation, route } : FormUserStackTypes) {
             value={password}
             onChangeText={setPassword}
             autoCapitalize='none'
+            placeholder={isUpdate ? 'Deixe em branco para não alterar' : ''}
+            placeholderTextColor="#999"
           />
         </View>
         <TouchableOpacity style={styles.button} onPress={isUpdate? handleUpdateProduct : handleCreateProduct}>

@@ -56,8 +56,8 @@ export async function productRoutes(fastify: FastifyInstance) {
     try {
       const token = await req.jwtDecode() as jwtPayload;
       req.body.userId = token.id;
-      const product = await productUseCase.updateProduct(req.params.id, req.body);
-      reply.send(product);
+      await productUseCase.updateProduct(req.params.id, req.body);
+      reply.send("Product updated");
     } catch (err) {
       reply.send(err);
     }
