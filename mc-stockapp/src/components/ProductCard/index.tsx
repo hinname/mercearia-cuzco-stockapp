@@ -14,7 +14,7 @@ export default function ProductCard(props: Props) {
   const navigation = useNavigation<any>();
 
   function handleNavigateToFormProduct() {
-    navigation.navigate('formProduct');
+    navigation.navigate('formProduct', { productId: props.product.id });
   }
   return (
     <View style={styles.product}>

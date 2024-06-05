@@ -54,6 +54,8 @@ export async function productRoutes(fastify: FastifyInstance) {
   fastify.put<{Body: ProductCreate, Params: {id: string}}>
   ('/:id', {onRequest: authMiddleware}, async (req, reply) => {
     try {
+      const token = await req.jwtDecode() as jwtPayload;
+      req.body.userId = token.id;
       const product = await productUseCase.updateProduct(req.params.id, req.body);
       reply.send(product);
     } catch (err) {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import { IProductCreate } from "../../interfaces";
-import { getProductById, postProduct } from "../../services/requests/products.requests";
+import { getProductById, postProduct, putProduct } from "../../services/requests/products.requests";
 import { FormProductStackTypes } from "../../types/stackNavigation";
 
 export default function FormProduct({ navigation, route }: FormProductStackTypes) {
@@ -36,7 +36,28 @@ export default function FormProduct({ navigation, route }: FormProductStackTypes
   };
 
   async function handleUpdateProduct() {
+    if (!route.params?.productId) {
+      alert('Erro ao buscar produto');
+      navigation.goBack();
+      return;
+    }
 
+    const product: IProductCreate = {
+      name,
+      price: parseFloat(price),
+      stockQuantity: parseInt(stockQuantity),
+      minStockQuantity: parseInt(minStockQuantity),
+      description
+    }
+
+    const data = await putProduct(route.params.productId, product);
+    if (!data) {
+      Alert.alert('Erro ao editar produto');
+      navigation.goBack();
+      return;
+    }
+    Alert.alert('Produto editado com sucesso!');
+    navigation.goBack();
   }
 
   async function handleCreateProduct() {

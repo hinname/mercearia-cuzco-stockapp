@@ -41,10 +41,10 @@ class ProductRepositoryPrisma implements ProductRepository {
     return result;
   };
 
-  async update(id: string, data: Product): Promise<Product> {
+  async update(id: string, data: ProductCreate): Promise<Product> {
     const result = await prisma.product.update({
       where: {
-        id: data.id
+        id: id
       },
       data: {
         name: data.name,
