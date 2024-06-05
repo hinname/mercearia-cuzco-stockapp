@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import { IProductCreate } from "../../interfaces";
 import { getProductById, postProduct } from "../../services/requests/products.requests";
@@ -50,11 +50,11 @@ export default function FormProduct({ navigation, route }: FormProductStackTypes
 
     const data = await postProduct(product);
     if (!data) {
-      alert('Erro ao cadastrar produto');
+      Alert.alert('Erro ao cadastrar produto');
       navigation.goBack();
       return;
     }
-    alert('Produto cadastrado com sucesso!');
+    Alert.alert('Produto cadastrado com sucesso!');
     navigation.goBack();
   }
 

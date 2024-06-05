@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 
 import styles from './styles';
 import { IUserCreate } from '../../interfaces';
@@ -8,12 +8,6 @@ import { FormUserStackTypes } from '../../types/stackNavigation';
 
 export default function FormUser({ navigation, route } : FormUserStackTypes) {
   const [isUpdate, setIsUpdate] = useState(false);
-  const [user, setUser] = useState<IUserCreate>({
-    email: '',
-    userName: '',
-    password: '',
-    phoneNumber: ''
-  });
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,20 +18,20 @@ export default function FormUser({ navigation, route } : FormUserStackTypes) {
   }
 
   async function handleCreateProduct() {
-    setUser({
-      email,
+    const user: IUserCreate = {
       userName,
+      email,
       password,
-      phoneNumber
-    });
+      phoneNumber,
+    };
 
     const data = await postUser(user);
     if (!data) {
-      alert('Erro ao cadastrar produto');
+      Alert.alert('Erro ao cadastrar usuario!');
       navigation.goBack();
       return;
     }
-    alert('Produto cadastrado com sucesso!');
+    Alert.alert('Produto cadastrado com sucesso!');
     navigation.goBack();
   }
 
