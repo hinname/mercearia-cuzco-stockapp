@@ -19,4 +19,13 @@ export const baseTabScreenOptions: BottomTabNavigationOptions = {
     fontWeight: 'bold',
   },
   headerTintColor: '#fff',
+  tabBarStyle: {
+    backgroundColor: '#0059B1',
+  },
+  tabBarLabelStyle: {
+    fontWeight: 'bold',
+    fontSize: 12,
+  },
+  tabBarActiveTintColor: '#fff',
+  tabBarInactiveTintColor: '#ccc',
 }
