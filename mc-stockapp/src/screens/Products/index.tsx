@@ -4,7 +4,7 @@ import styles from './styles';
 import { IProduct } from '../../interfaces';
 import ProductCard from '../../components/ProductCard';
 import { ProductsListStackTypes } from '../../types/stackNavigation';
-import { getProducts } from '../../services/requests/products.requests';
+import { getProducts, postSearchProduct } from '../../services/requests/products.requests';
 import React from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -29,6 +29,14 @@ export default function Products({ navigation, route } : ProductsListStackTypes)
   function handleNavigateToFormProduct() {
     navigation.navigate('formProduct', {});
   }
+
+  async function handleSearchProducts() {
+    const data = await postSearchProduct(search);
+    if (!data) {
+      alert('Erro ao buscar produtos');
+    }
+    setProducts(data);
+  }
   return (
     <View style={styles.container}>
       <View style={styles.search}>
@@ -39,7 +47,7 @@ export default function Products({ navigation, route } : ProductsListStackTypes)
           value={search}
           onChangeText={setSearch}
         />
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleSearchProducts}>
           <Text style={styles.buttonText}>Buscar</Text>
         </TouchableOpacity>  
       </View>

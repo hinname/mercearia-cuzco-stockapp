@@ -40,6 +40,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
   },
+  inputMultiLine: {
+    backgroundColor: '#1E1A24',
+    color: '#fff',
+    borderRadius: 4,
+    padding: 12,
+    marginBottom: 16,
+    height: 100,
+  },
 });
 
 export default styles;

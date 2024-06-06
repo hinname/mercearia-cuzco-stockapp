@@ -127,7 +127,7 @@ export default function FormProduct({ navigation, route }: FormProductStackTypes
         <View>
           <Text style={styles.inputText}>Descrição</Text>
           <TextInput 
-            style={styles.input} 
+            style={styles.inputMultiLine} 
             multiline={true}
             value={description}
             onChangeText={setDescription}

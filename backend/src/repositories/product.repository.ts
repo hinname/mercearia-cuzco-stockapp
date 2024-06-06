@@ -57,6 +57,7 @@ class ProductRepositoryPrisma implements ProductRepository {
     })
     return result;
   };
+
 }
 
 export { ProductRepositoryPrisma }

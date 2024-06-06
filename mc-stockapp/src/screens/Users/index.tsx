@@ -4,7 +4,7 @@ import styles from './styles';
 import { IUser } from '../../interfaces';
 import UserCard from '../../components/UserCard';
 import { UsersListStackTypes } from '../../types/stackNavigation';
-import { getUsers } from '../../services/requests/users.requests';
+import { getUsers, postSearchUser } from '../../services/requests/users.requests';
 import { useFocusEffect } from '@react-navigation/native';
 import React from 'react';
 
@@ -30,6 +30,14 @@ export default function Users({ navigation, route} : UsersListStackTypes) {
     navigation.navigate('formUser', {});
   }
 
+  async function handleSearchUser() {
+    const data = await postSearchUser(search);
+    if (!data) {
+      alert('Erro ao buscar produtos');
+    }
+    setUsers(data);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.search}>
@@ -40,7 +48,7 @@ export default function Users({ navigation, route} : UsersListStackTypes) {
           value={search}
           onChangeText={setSearch}
         />
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleSearchUser}>
           <Text style={styles.buttonText}>Buscar</Text>
         </TouchableOpacity>  
       </View>
