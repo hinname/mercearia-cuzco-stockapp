@@ -48,6 +48,13 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     height: 100,
   },
+  buttonDelete: {
+    backgroundColor: '#FF4F4F',
+    padding: 16,
+    borderRadius: 4,
+    alignItems: 'center',
+    marginTop: 16,
+  }
 });
 
 export default styles;

@@ -26,6 +26,15 @@ class ProductUseCase {
   async updateProduct(id: string, product: ProductCreate): Promise<void> {
     await this.productRepository.update(id, product);
   }
+
+  async deleteProduct(id: string): Promise<void> {
+    try {
+      await this.productRepository.delete(id);
+    }
+    catch (err) {
+      throw new Error('Erro ao deletar produto');
+    }
+  }
 }
 
 export { ProductUseCase };

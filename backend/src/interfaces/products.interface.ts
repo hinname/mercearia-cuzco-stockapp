@@ -23,4 +23,5 @@ export interface ProductRepository {
   create(data: ProductCreate): Promise<Product>;
   update(id: string, data: ProductCreate): Promise<Product>;
   searchByName(name: string): Promise<Product[] | null>;
+  delete(id: string): Promise<void>;
 }

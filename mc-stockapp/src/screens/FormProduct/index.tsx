@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import { IProductCreate } from "../../interfaces";
-import { getProductById, postProduct, putProduct } from "../../services/requests/products.requests";
+import { deleteProduct, getProductById, postProduct, putProduct } from "../../services/requests/products.requests";
 import { FormProductStackTypes } from "../../types/stackNavigation";
 
 export default function FormProduct({ navigation, route }: FormProductStackTypes) {
@@ -79,6 +79,38 @@ export default function FormProduct({ navigation, route }: FormProductStackTypes
     navigation.goBack();
   }
 
+  async function handleAlertDeleteProduct() {
+    if (!route.params?.productId) {
+      alert('Erro ao buscar produto');
+      navigation.goBack();
+      return;
+    }
+
+    Alert.alert('Deseja realmente deletar este produto?', '', [
+      {
+        text: 'Cancelar',
+        style: 'cancel'
+      },
+      {
+        text: 'Deletar',
+        onPress: await handleDeleteProduct
+      }
+    ]); 
+  }
+
+  async function handleDeleteProduct() {
+    try {
+      await deleteProduct(route.params.productId ?? "");
+      Alert.alert('Produto deletado com sucesso!');
+      navigation.goBack();
+    }
+    catch {
+      Alert.alert('Erro ao deletar produto');
+      navigation.goBack();
+      return;
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -140,6 +172,13 @@ export default function FormProduct({ navigation, route }: FormProductStackTypes
             }
           </Text>
         </TouchableOpacity>
+        {
+          isUpdate && (
+            <TouchableOpacity style={styles.buttonDelete} onPress={handleAlertDeleteProduct}>
+              <Text style={styles.buttonText}>Deletar</Text>
+            </TouchableOpacity>
+          )
+        }
       </View>
     </View>
   )

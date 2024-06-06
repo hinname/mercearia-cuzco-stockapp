@@ -62,4 +62,14 @@ export async function productRoutes(fastify: FastifyInstance) {
       reply.send(err);
     }
   });
+
+  fastify.delete<{Params: {id: string}}>
+  ('/:id', {onRequest: authMiddleware}, async (req, reply) => {
+    try {
+      await productUseCase.deleteProduct(req.params.id);
+      reply.send("Product deleted");
+    } catch (err) {
+      reply.send(err);
+    }
+  });
 }

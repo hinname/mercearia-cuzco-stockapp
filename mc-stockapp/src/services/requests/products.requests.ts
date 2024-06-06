@@ -51,3 +51,12 @@ export async function postSearchProduct(name: string): Promise<IProduct[] | null
     return null;
   }
 }
+
+export async function deleteProduct(id: string): Promise<void>{
+  try {
+    const headers = await getHeaders();
+    await api.delete(`/products/${id}`, {headers: headers});
+  } catch (error) {
+    return;
+  }
+}
