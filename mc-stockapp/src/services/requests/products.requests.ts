@@ -22,7 +22,7 @@ export async function getProductById(id: string): Promise<IProduct | null>{
   }
 }
 
-export async function postProduct(product: IProductCreate): Promise<IProduct | null>{
+export async function postProduct(product: IProductCreate): Promise<string | null>{
   try {
     const headers = await getHeaders();
     const response = await api.post('/products', product, {headers: headers});
@@ -32,7 +32,7 @@ export async function postProduct(product: IProductCreate): Promise<IProduct | n
   }
 }
 
-export async function putProduct(id: string, product: IProductCreate): Promise<IProduct | null>{
+export async function putProduct(id: string, product: IProductCreate): Promise<string | null>{
   try {
     const headers = await getHeaders();
     const response = await api.put(`/products/${id}`, product, {headers: headers});

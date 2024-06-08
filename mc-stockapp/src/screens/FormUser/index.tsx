@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, Linking } from 'react-native';
 
 import styles from './styles';
 import { IUserCreate } from '../../interfaces';
@@ -71,7 +71,19 @@ export default function FormUser({ navigation, route } : FormUserStackTypes) {
       navigation.goBack();
       return;
     }
-    Alert.alert('Produto cadastrado com sucesso!');
+
+    Alert.alert('Produto cadastrado com sucesso!', 'Deseja enviar dados através do whatsapp?', [
+      {
+        text: 'Sim',
+        onPress: () => {
+          const message = `Olá, ${user.userName}! Segue seus dados para acesso: \nEmail: ${user.email}\nSenha: ${user.password}`;
+          Linking.openURL(`whatsapp://send?phone=+55${user.phoneNumber}&text=${message}`);
+        }
+      },
+      {
+        text: 'Não'
+      }
+    ]);
     navigation.goBack();
   }
 
@@ -110,6 +122,8 @@ export default function FormUser({ navigation, route } : FormUserStackTypes) {
             keyboardType='phone-pad'
             value={phoneNumber}
             onChangeText={setPhoneNumber}
+            placeholder='Apenas números e com DDD'
+            placeholderTextColor="#999"
           />
         </View>
         <View>

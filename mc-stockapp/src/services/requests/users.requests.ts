@@ -35,7 +35,7 @@ export async function getUserById(id: string): Promise<IUser | null> {
   }
 }
 
-export async function postUser(user: IUserCreate): Promise<IUser | null> {
+export async function postUser(user: IUserCreate): Promise<string | null> {
   try {
     const headers = await getHeaders();
     const response = await api.post('/users', user, { headers: headers });
@@ -45,7 +45,7 @@ export async function postUser(user: IUserCreate): Promise<IUser | null> {
   }
 }
 
-export async function putUser(id: string, user: IUserCreate): Promise<IUser | null> {
+export async function putUser(id: string, user: IUserCreate): Promise<string | null> {
   try {
     const headers = await getHeaders();
     const response = await api.put(`/users/${id}`, user, { headers: headers });
