@@ -21,10 +21,13 @@ export const baseTabScreenOptions: BottomTabNavigationOptions = {
   headerTintColor: '#fff',
   tabBarStyle: {
     backgroundColor: '#0059B1',
+    borderTopWidth: 0,
+    height: 106,
+    paddingBottom: 20,
   },
   tabBarLabelStyle: {
     fontWeight: 'bold',
-    fontSize: 12,
+    fontSize: 14,
   },
   tabBarActiveTintColor: '#fff',
   tabBarInactiveTintColor: '#ccc',

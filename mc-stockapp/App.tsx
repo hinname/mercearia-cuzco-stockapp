@@ -10,12 +10,12 @@ LogBox.ignoreLogs([
 ]);
 
 import SignIn from './src/screens/SignIn';
-import SignUp from './src/screens/SignUp';
 import Users from './src/screens/Users';
 import Products from './src/screens/Products';
 import Settings from './src/screens/Settings';
 import FormProduct from './src/screens/FormProduct';
 import FormUser from './src/screens/FormUser';
+import Ionicon from "@expo/vector-icons/Ionicons";
 
 import { LoginStackParamList, ProductsStackParamList, UsersStackParamList } from './src/types/stackNavigation';
 import { MainTabParamList } from './src/types/bottomTabNavigation';
@@ -54,12 +54,33 @@ export default function App() {
             <Tab.Screen name="products" options={{
               headerShown: false,
               tabBarLabel: 'Produtos',
+              tabBarIcon: ({ color, size, focused }) => {
+                if(focused) {
+                  return <Ionicon name="cube" size={size} color={color} />
+                }
+                return <Ionicon name="cube-outline" size={size} color={color} />
+              }
               }} component={ProductsNav} />
             <Tab.Screen name="users" options={{
               headerShown: false,
               tabBarLabel: 'Usuários',
+              tabBarIcon: ({ color, size, focused }) => {
+                if(focused) {
+                  return <Ionicon name="people" size={size} color={color} />
+                }
+                return <Ionicon name="people-outline" size={size} color={color} />
+              }
               }} component={UsersNav} />
-            <Tab.Screen name="settings" options={{title: "Configurações"}} component={Settings} initialParams={{funcSignIn: setIsSignedIn}} />
+            <Tab.Screen name="settings" options={{
+              title: "Configurações",
+              tabBarLabel: 'Configurações',
+              tabBarIcon: ({ color, size, focused }) => {
+                if(focused) {
+                  return <Ionicon name="settings" size={size} color={color} />
+                }
+                return <Ionicon name="settings-outline" size={size} color={color} />
+              }
+              }} component={Settings} initialParams={{funcSignIn: setIsSignedIn}} />
           </Tab.Navigator>
         ) : (
           <StackLogin.Navigator screenOptions={baseStackScreenOptions}>

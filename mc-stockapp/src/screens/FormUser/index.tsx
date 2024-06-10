@@ -72,12 +72,12 @@ export default function FormUser({ navigation, route } : FormUserStackTypes) {
       return;
     }
 
-    Alert.alert('Produto cadastrado com sucesso!', 'Deseja enviar dados através do whatsapp?', [
+    Alert.alert('Usuário cadastrado com sucesso!', 'Deseja enviar dados através do whatsapp?', [
       {
         text: 'Sim',
         onPress: () => {
           const message = `Olá, ${user.userName}! Segue seus dados para acesso: \nEmail: ${user.email}\nSenha: ${user.password}`;
-          Linking.openURL(`whatsapp://send?phone=+55${user.phoneNumber}&text=${message}`);
+          Linking.openURL(`whatsapp://send?phone=+55${user.phoneNumber}&text=${encodeURIComponent(message)}`);
         }
       },
       {
