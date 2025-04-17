@@ -17,4 +17,5 @@ This topic is divided into separate sections to make it easier to install and ru
 
 Go to the **Getting Started** section of each project:
 - [**WebAPI**](backend/README.md##getting-started)
+- [**APP Mobile**](mc-stockapp/README.md)
 
